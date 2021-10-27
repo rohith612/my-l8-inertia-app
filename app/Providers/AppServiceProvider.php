@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Interfaces\ProductServiceInterface;
+use App\Services\ProductService;
 use Inertia\Inertia;
 use Session;
 
@@ -33,6 +35,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        if (app()->environment('local')) {
+            $this->app->bind(ProductServiceInterface::class, function () {
+                return new ProductService();
+            });
+        }
 
     }
 }

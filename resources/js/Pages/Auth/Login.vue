@@ -3,7 +3,8 @@
 
     <jet-authentication-card>
         <template #logo>
-            <jet-authentication-card-logo />
+            <!-- <jet-authentication-card-logo /> -->
+            <product-logo />
         </template>
 
         <jet-validation-errors class="mb-4" />
@@ -53,6 +54,8 @@
     import JetLabel from '@/Jetstream/Label.vue'
     import JetValidationErrors from '@/Jetstream/ValidationErrors.vue'
     import { Head, Link } from '@inertiajs/inertia-vue3';
+    import ProductLogo from '@/Components/ProductLogo.vue'
+
 
     export default defineComponent({
         components: {
@@ -65,6 +68,7 @@
             JetLabel,
             JetValidationErrors,
             Link,
+            ProductLogo
         },
 
         props: {

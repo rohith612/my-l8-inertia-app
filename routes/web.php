@@ -30,4 +30,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('todo-item', ItemController::class)->name('*', 'todo-item');
+   
+    Route::resource('products-master', ProductController::class)->name('*', 'products-master');
+    Route::post('products-master/{product}/remove-additional-image/{image}', 'ProductController@removeAdditionalImage')->name('products-master.product.remove-additional-image');
+    
 });
