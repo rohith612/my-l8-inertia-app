@@ -8,7 +8,7 @@
 
         <div class="max-w-6xl mx-auto py-7 sm:px-6 lg:px-8">
             <div class="block mb-6">
-                <alert-box title="Informational message"  message="Some additional text to explain said message. " />
+                <!-- <alert-box title="Informational message"  message="Some additional text to explain said message. " /> -->
                 <Link :href="route('products-master.create')">
                 <jet-secondary-button class="hover:bg-gray-100 text-black font-bold py-2 px-4 rounded">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -38,7 +38,7 @@
                             <table class="min-w-full divide-y divide-white-200 w-full">
                                 <thead>
                                 <tr>
-                                    <th scope="col" width="50" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                                    <th scope="col" width="50" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">SL</th>
                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Code</th>
                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
@@ -127,6 +127,7 @@
         props: {
             products: Object,
             success: String,
+            status: Number,
         },
         data(){
             return{

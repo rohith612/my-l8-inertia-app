@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Products\StoreProductRequest;
-use App\Http\Requests\Products\UpdateProductRequest;
-use Illuminate\Http\Request;
-use App\Interfaces\ProductServiceInterface;
-use App\Models\Product;
-use App\Models\Category;
 use Inertia\Inertia;
+use Illuminate\Http\Request;
+use App\Http\Requests\Products\{
+    StoreProductRequest,
+    UpdateProductRequest
+};
+use Illuminate\Support\Facades\Gate;
+use Symfony\Component\HttpFoundation\Response;
+use App\Interfaces\ProductServiceInterface;
+use App\Models\{
+    Product, Category
+};
 
 class ProductController extends Controller
 {

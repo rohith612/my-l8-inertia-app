@@ -16,20 +16,26 @@
 
                                 <div class="my-4 col-span-6 sm:col-span-4">
                                     <input type="file" class="hidden" ref="picture_path"  @change="updatePhotoPreview">
-                                    <jet-label for="photo" value="Product Image" />
+                                   
+                                   
+                                    <div class="rounded-md border-2 border-gray-100 overflow-auto">
+                                        <div class="m-4">
+                                            <jet-label for="photo" value="Product Image" />
 
-                                     <div class="my-4" v-show="photoPreview">
-                                        <span class="block w-40 h-40 bg-cover bg-no-repeat bg-center border-solid border-4 border-green-500 rounded-md"
-                                            :style="'background-image: url(\'' + photoPreview + '\');'">
-                                            <button @click.prevent="removeMainPreview"><i class="fa fa-times text-red-800 z-20 hover:text-white m-2"></i></button>
-                                        </span>
-                                       
+                                            <div class="my-4" v-show="photoPreview">
+                                                <span class="block w-40 h-40 bg-cover bg-no-repeat bg-center border-solid border-4 border-green-500 rounded-md"
+                                                    :style="'background-image: url(\'' + photoPreview + '\');'">
+                                                    <button @click.prevent="removeMainPreview"><i class="fa fa-times text-red-800 z-20 hover:text-white m-2"></i></button>
+                                                </span>
+                                            
+                                            </div>
+
+                                            <jet-secondary-button class="mt-2 mr-2" type="button" @click.prevent="selectNewPhoto">
+                                                upload image
+                                            </jet-secondary-button>
+                                            <jet-input-error :message="form.errors.picture_path " class="mt-2" />
+                                        </div>
                                     </div>
-
-                                    <jet-secondary-button class="mt-2 mr-2" type="button" @click.prevent="selectNewPhoto">
-                                        upload image
-                                    </jet-secondary-button>
-                                    <jet-input-error :message="form.errors.picture_path " class="mt-2" />
                                 </div>
 
                                 <div class="my-4 col-span-6 sm:col-span-4">
@@ -37,21 +43,28 @@
 
                                     <jet-label for="photo" value="Additional Product Image" />
 
-                                    <div class="my-4 flex flex-row space-x-4" v-show="photoPreviews.length">
-                                        <div class="border-solid border-4 border-green-500 rounded-md" v-for="(items,index) in photoPreviews" :key="index">
-                                        <span  class="block w-40 h-40 bg-cover bg-no-repeat bg-center " :style="'background-image: url(\'' + items + '\');'">
-                                            <button @click.prevent="removeNewAdditionalImage(index)">
-                                                <i class="fa fa-times text-red-800 z-20 hover:text-white m-2"></i>
-                                            </button>
-                                        </span>
+
+                                    <div class="rounded-md border-2 border-gray-100 overflow-auto">
+                                        <div class="w-8 m-4">
+
+                                            <div class="relative h-12 w-20">
+                                                <div class="absolute inset-x-0 top-0 h-12 w-32">
+                                                    <jet-secondary-button class="" type="button" @click.prevent="selectMultiplePhoto">Add images</jet-secondary-button>
+                                                </div>
+                                            </div>
+
+                                            <div class="my-4 flex flex-row space-x-4" v-show="photoPreviews.length">
+                                                <div class="border-solid border-4 border-green-500 rounded-md" v-for="(items,index) in photoPreviews" :key="index">
+                                                <span  class="block w-40 h-40 bg-cover bg-no-repeat bg-center " :style="'background-image: url(\'' + items + '\');'">
+                                                    <button @click.prevent="removeNewAdditionalImage(index)">
+                                                        <i class="fa fa-times text-red-800 z-20 hover:text-white m-2"></i>
+                                                    </button>
+                                                </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-
-                                    <jet-secondary-button class="mt-2 mr-2" type="button" @click.prevent="selectMultiplePhoto">+ additional image</jet-secondary-button>
-
                                     <jet-input-error :message="form.errors.additional_imgs" class="mt-2" />
-
-
                                 </div>
 
                                 <div class="my-4 col-span-6 sm:col-span-4">
@@ -62,7 +75,7 @@
                                 
                                 <div class="my-4 col-span-6 sm:col-span-4">
                                     <jet-label for="name" value="Description" />
-                                    <jet-input id="description" type="text" class="mt-1 block w-full" v-model="form.description" />
+                                     <textarea class="form-textarea mt-1 block w-full" v-model="form.description" rows="3" placeholder=""></textarea>
                                     <jet-input-error :message="form.errors.description" class="mt-2" />
                                 </div>
 
