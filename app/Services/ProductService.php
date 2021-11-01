@@ -73,6 +73,8 @@ class ProductService implements ProductServiceInterface{
         if(!empty($request['picture_path'])){
             $request['picture_path'] = $this -> uploadImage($request['picture_path']);
             $this -> removeImageFiles($product->picture_path);
+        }else{
+            unset($request['picture_path']);
         }
         if(!empty($request['additional_imgs'])){
             $additionalFiels = [];
@@ -80,7 +82,7 @@ class ProductService implements ProductServiceInterface{
                 $additionalFiels[] = new ProductsImages(['image_name' => $this -> uploadImage($file, false)]);
             }
             // remove additional images
-            $this -> removeAdditionalImageDisk($product);
+            // $this -> removeAdditionalImageDisk($product);
             $product->additionalImages()->saveMany($additionalFiels);
         }
         return $product->update($request);

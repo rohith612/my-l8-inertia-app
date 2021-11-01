@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+use Symfony\Component\HttpFoundation\Response;
+use App\Interfaces\ProductServiceInterface;
 use App\Http\Requests\Products\{
     StoreProductRequest,
     UpdateProductRequest
 };
-use Illuminate\Support\Facades\Gate;
-use Symfony\Component\HttpFoundation\Response;
-use App\Interfaces\ProductServiceInterface;
 use App\Models\{
     Product, Category
 };
@@ -77,7 +77,6 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateProductRequest $request, $id){
-        dd($request->all());
         $this -> productService -> productUpdate($request->validated(), Product::findOrFail($id));
         return redirect()->route('products-master.index')->with('success', "Products Updated");
     }

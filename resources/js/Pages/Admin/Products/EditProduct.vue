@@ -1,6 +1,5 @@
 <template>
     <app-layout title="createItem">
-
     <!-- <jet-validation-errors class="mb-4" /> -->
 
     <div class="max-w-6xl mx-auto py-8 sm:px-6 lg:px-8">
@@ -13,7 +12,7 @@
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     
                 <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" @submit.prevent="submit">
+                        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" @submit.prevent="submit" enctype="multipart/form-data" >
 
                                 <div class="my-4 col-span-6 sm:col-span-4">
                                     
@@ -31,8 +30,10 @@
                                             <div class="my-4" v-show="photoPreview">
                                                 <span class="block w-40 h-40 bg-cover bg-no-repeat bg-center border-solid border-4 border-green-500 rounded-md"
                                                     :style="'background-image: url(\'' + photoPreview + '\');'">
-                                                    <button @click.prevent="removeMainPreview">
-                                                    <i class="fa fa-times text-red-800 z-20 hover:text-white m-2"></i>
+                                                    <button class="hover:bg-red-500" @click.prevent="removeMainPreview">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                                                        </svg>
                                                     </button>
                                                 </span>
                                             
@@ -48,9 +49,15 @@
                                 <div class="my-4 col-span-6 sm:col-span-4">
                                     <input type="file" class="hidden" ref="additional_imgs" @change="updatePhotosPreview" multiple>
 
-                                    <jet-label for="photo" value="Additional Product Images" />
-
-                                    <div class="rounded-md border-2 border-gray-100 overflow-auto">
+                                    <jet-label for="photo" value="Additional Product Images" 
+                                    :class="{'text-red-500' : multipleImageValidationError }"
+                                    />
+                                    <span v-if="multipleImageValidationError" class="text-sm text-red-500">
+                                        {{ multipleImageValidationError }}
+                                    </span>
+                                    <div class="rounded-md border-2 border-gray-100 overflow-auto"
+                                    :class="{'border border-red-200' : multipleImageValidationError }"
+                                    >
                                         <div class="w-8 m-4">
 
                                             <div class="relative h-12 w-20">
@@ -62,9 +69,11 @@
                                             <div class="my-4 flex flex-row space-x-4" v-show="product.additional_images.length">
                                                 <div class="border-solid border-4 border-indigo-500 rounded-md"  v-for="(item, index) in product.additional_images" :key="index" >
                                                     <span  class="block w-40 h-40 bg-cover bg-no-repeat bg-center " :style="'background-image: url(\'' + item.file_main_url + '\');'">
-                                                         <button @click.prevent="removeAdditionalImage(item.id)">
-                                                        <i class="fa fa-times text-red-800 z-20 hover:text-white m-2"></i>
-                                                         </button>
+                                                        <button class="hover:bg-red-500" @click.prevent="removeAdditionalImage(item.id)">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                                                        </svg>
+                                                        </button>
                                                     </span>
                                                 </div>
                                             </div>
@@ -72,8 +81,10 @@
                                             <div class="my-4 flex flex-row space-x-4" v-show="photoPreviews.length">
                                                 <div class="border-solid border-4 border-green-500 rounded-md" v-for="(items,index) in photoPreviews" :key="index">
                                                 <span  class="block w-40 h-40 bg-cover bg-no-repeat bg-center " :style="'background-image: url(\'' + items + '\');'">
-                                                    <button @click.prevent="removeNewAdditionalImage(index)">
-                                                        <i class="fa fa-times text-red-800 z-20 hover:text-white m-2"></i>
+                                                    <button class="hover:bg-red-500" @click.prevent="removeNewAdditionalImage(index)">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                                                        </svg>
                                                     </button>
                                                 </span>
                                                 </div>
@@ -144,8 +155,6 @@
     import JetInputError from '@/Jetstream/InputError.vue'
     import JetSecondaryButton from '@/Jetstream/SecondaryButton.vue'
 
-
-
     export default defineComponent({
         components: {
             AppLayout, 
@@ -165,6 +174,7 @@
             return {
                 productId :  this.product.id,
                 form: this.$inertia.form({
+                    _method: 'put',
                     name: this.product.name,
                     description: this.product.description,
                     price: this.product.price,
@@ -175,8 +185,14 @@
                 }),
                 photoPreview: null,
                 photoPreviews: [],
+                multipleImageValidationError: null
             }
         },
+        // mounted() {
+        //     window.setInterval(() => {
+        //         console.log('called');
+        //     }, 3000)
+        // },
         methods: {
             selectNewPhoto() {
                 this.$refs.picture_path.click();
@@ -195,18 +211,26 @@
                 reader.readAsDataURL(productImage)
             },
             updatePhotosPreview(){
-                for (let file of this.$refs.additional_imgs.files) {
-                    if (! file) continue
-                    this.form.additional_imgs.push(file)
-                    const reader = new FileReader()
-                    reader.onload = (e) => {
-                        this.photoPreviews.push(e.target.result)
+                let databaseFileLength = this.product.additional_images.length
+                this.multipleImageValidationError = null
+                let fileLength = this.$refs.additional_imgs.files.length
+                let uploadFileLength = this.form.additional_imgs.length 
+                let totalLength = fileLength + uploadFileLength + databaseFileLength
+                if(totalLength > 5){
+                    this.multipleImageValidationError = 'Maximum 5 images only!'
+                }else{
+                    for (let file of this.$refs.additional_imgs.files) {
+                        if (! file) continue
+                        this.form.additional_imgs.push(file)
+                        const reader = new FileReader()
+                        reader.onload = (e) => {
+                            this.photoPreviews.push(e.target.result)
+                        }
+                        reader.readAsDataURL(file)
                     }
-                    reader.readAsDataURL(file)
                 }
             },
             removeNewAdditionalImage(index){
-                if(!this.form.additional_imgs.length || !this.photoPreviews.length) return false
                 this.photoPreviews.splice(index, 1)
                 this.form.additional_imgs.splice(index, 1)
             },
@@ -222,15 +246,12 @@
                 } else {
                     return false
                 }
-                
             },
             submit() {
-                this.form.put(this.route('products-master.update', this.productId), {
+                this.form.post(this.route('products-master.update', this.productId), {
                     onFinish: () => this.form.reset(),
                 })
             }
         },
-
-        
     })
 </script>

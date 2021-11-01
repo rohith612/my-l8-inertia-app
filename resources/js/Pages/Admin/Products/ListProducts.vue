@@ -6,9 +6,13 @@
             </h2>
         </template> -->
 
+        <div class="alert">
+            
+        </div>
+
         <div class="max-w-6xl mx-auto py-7 sm:px-6 lg:px-8">
             <div class="block mb-6">
-                <!-- <alert-box title="Informational message"  message="Some additional text to explain said message. " /> -->
+                <!-- <alert-box  v-if="$page.props.flash.success" title="Informational message"  message="$page.props.flash.success" /> -->
                 <Link :href="route('products-master.create')">
                 <jet-secondary-button class="hover:bg-gray-100 text-black font-bold py-2 px-4 rounded">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

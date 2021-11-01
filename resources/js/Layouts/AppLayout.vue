@@ -286,9 +286,8 @@
                 </div>
             </header>
             <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100">
-                <!-- <modern-badge /> -->
+                <solid-alert  v-if="$page.props.flash.success" />
                 <slot></slot>
-            
             </main>
         </div>
     </div>
@@ -306,6 +305,7 @@
     import JetResponsiveNavLink from '@/Jetstream/ResponsiveNavLink.vue'
     import { Head, Link } from '@inertiajs/inertia-vue3';
     import ModernBadge from '@/Components/ModernBadge.vue'
+    import SolidAlert from '@/Components/SolidAlert.vue'
     import ProductLogo from '@/Components/ProductLogo.vue'
 
     export default defineComponent({
@@ -321,7 +321,7 @@
             JetDropdownLink,
             JetNavLink,
             JetResponsiveNavLink,
-            Link, ModernBadge, ProductLogo
+            Link, ModernBadge, ProductLogo, SolidAlert
         },
 
         data() {
