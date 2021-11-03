@@ -62,11 +62,11 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id){
+    public function edit(Product $products_master){
         // abort_if(Gate::denies('product_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         return Inertia::render('Admin/Products/EditProduct', [
             'categories' =>  Category::latest()->pluck('id','name'),
-            'product' =>  Product::where('id', $id)->with(['productCategory','additionalImages'])->first()
+            'product' =>  $products_master->load('productCategory', 'additionalImages')
         ]);
     }
     /**
@@ -76,8 +76,8 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProductRequest $request, $id){
-        $this -> productService -> productUpdate($request->validated(), Product::findOrFail($id));
+    public function update(UpdateProductRequest $request, Product $products_master){
+        $this -> productService -> productUpdate($request->validated(), $products_master);
         return redirect()->route('products-master.index')->with('success', "Products Updated");
     }
     /**
@@ -86,9 +86,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id){
+    public function destroy(Product $products_master){
         // abort_if(Gate::denies('product_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        $this -> productService -> productRemove(Product::findOrFail($id));
+        $this -> productService -> productRemove($products_master);
         return redirect()->route('products-master.index')->with('success', 'Products Deleted');
     }
 

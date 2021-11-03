@@ -52,7 +52,7 @@ class ProductService implements ProductServiceInterface{
      * 
      * @return None
      */
-    public function uploadImage($image, $thumbNeed = true){
+    private function uploadImage($image, $thumbNeed = true){
         $picture_path= $image->getClientOriginalName();
         if($thumbNeed){
             $img = Image::make($image->path());
@@ -104,7 +104,7 @@ class ProductService implements ProductServiceInterface{
      * 
      * @return objects
      */
-    public function removeImageFiles($product_file){
+    private function removeImageFiles($product_file){
         if (Storage::disk('local')->exists(config('config.THUMB_UPATH').$product_file)) 
             Storage::disk('local')->delete(config('config.THUMB_UPATH').$product_file);
         
@@ -116,7 +116,7 @@ class ProductService implements ProductServiceInterface{
      * 
      * @return objects
      */
-    public function removeAdditionalImageDisk($product){
+    private function removeAdditionalImageDisk($product){
         $fileName = [];
         foreach($product -> additionalImages as $removeFile){
             $fileName[] = config('config.MAIN_UPATH').$removeFile -> image_name;
