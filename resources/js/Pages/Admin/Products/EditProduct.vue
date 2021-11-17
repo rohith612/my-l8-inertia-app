@@ -1,7 +1,6 @@
 <template>
-    <app-layout title="createItem">
+    <app-layout title="EditProduct">
     <!-- <jet-validation-errors class="mb-4" /> -->
-
     <div class="max-w-6xl mx-auto py-8 sm:px-6 lg:px-8">
         <div class="block mb-6">
             <Link :href="route('products-master.index')" ><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -10,7 +9,6 @@
         </div>
         <div class="flex flex-col">
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                    
                 <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                         <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" @submit.prevent="submit" enctype="multipart/form-data" >
 

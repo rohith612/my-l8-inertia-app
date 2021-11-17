@@ -33,5 +33,7 @@ Route::group(['middleware' => 'auth'], function () {
    
     Route::resource('products-master', ProductController::class)->name('*', 'products-master');
     Route::post('products-master/{product}/remove-additional-image/{image}', 'ProductController@removeAdditionalImage')->name('products-master.product.remove-additional-image');
-    
+
+
+    Route::resource('category-master', CategoryController::class)->name('*', 'category-master');
 });

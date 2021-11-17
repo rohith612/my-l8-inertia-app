@@ -1,10 +1,5 @@
 <template>
-    <app-layout title="Todo">
-        <!-- <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Todos
-            </h2>
-        </template> -->
+    <app-layout title="ListProducts">
 
         <div class="alert">
             
@@ -100,6 +95,7 @@
 
     </app-layout>
 </template>
+
 <script>
     import { defineComponent } from 'vue'
     import { Link } from '@inertiajs/inertia-vue3';
